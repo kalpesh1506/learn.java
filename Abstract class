@@ -1,0 +1,110 @@
+import pack.basic;
+
+
+public class external extends abstractClass{
+		private String x;
+		private int y;
+		/*
+		 * getters and setters for the private data members of the class
+		 */
+	public String getX() {
+			return x;
+		}
+		public void setX(String x) {
+			this.x = x;
+		}
+		public int getY() {
+			return y;
+		}
+		public void setY(int y) {
+			this.y = y;
+		}
+	public static void main(String[] args) {
+		derived d1 = new derived();
+		
+		System.out.println(d1.getClass().getGenericSuperclass());
+		/*
+		 * if we do not write the super(....) in the first line 
+		 * of derived(....) then it calls the base class's default constructor by default
+		 */
+		derived d2 = new derived(10);
+		
+		System.out.println(d2.getClass().toGenericString());
+		/*
+		 * this case represents a reference of type base class 
+		 * but acts like object of derived class pointing to the memory allocated 
+		 * for both the derived & the basic class members
+		 */
+		basic b1 = new derived();
+		System.out.println(b1.getClass().getName());
+		/*
+		 * WHEN CLASSES IN DIFFERENT PACKAGES:
+		 * To access the members or the methods of any class from other class
+		 * with no inheritance involved, they need to be public
+		 * In case of inheritance they can be either public or protected
+		 * WHEN CLASSES IN THE SAME PACKAGE:
+		 * To access the members or the methods of any class from other class
+		 * with no inheritance involved, they need to be either public or protected or default
+		 * In case of inheritance they can be either public or protected or default
+		 */
+		 /* 
+		  * When it's the case of method overriding then the access specifiers of the
+		  * methods of the derived class must be the same as that of the base class
+		  * To access a method of derived class using the variable of derived class but 
+		  * the reference of base class we need to make sure that it is present in the 
+		  * base class as well
+		  * b1.method1(....);// here it gives priority to the derived class's method method1(....)
+		  * If there was no such method in derived class it would execute the body of the 
+		  * base class method
+		  * If method you're trying to access is not there in the base class as well
+		  * it gives error
+		 */
+		b1.method1(25);
+		//b1.show();
+		basic b2 = new basic();
+		System.out.println(b2.getClass().getGenericSuperclass());
+		//derived d4 = (derived) new basic();
+		//method1(b1);
+		//method1(b2);
+		//method1(d4);// works as basic b = new derived();
+		method1(d2);// works as basic b = new derived();
+		/*
+		 * derived d3 = new basic();
+		 * is invalid because in this case the memory will only be allocated for the 
+		 * data members of base class & not for the derived class data members
+		 * & therefore we type cast it to make it work as an object of derived class
+		 */
+		
+		external e = new external();
+		e.read();
+		e.read(0);
+		e.read(0, 0);
+		read(0.0);
+	}
+	/*
+	 * (non-Javadoc)
+	 * @see abstractClass#read()
+	 */
+	public void read()
+	{
+		
+	}
+	/*
+	 * (non-Javadoc)
+	 * @see abstractClass#read(int, int)
+	 */
+	public void read(int a, int b)
+	{
+		
+	}
+	public static void method1(basic b)
+	{	System.out.println("EXTERNAL: method1()");
+		b.method1(0);
+		if(b instanceof basic)
+		{	System.out.println(b.getClass());
+		
+			derived d = (derived) b;//works for b1 but gives type cast exception for b2
+			System.out.println(d.getClass());
+		}
+	}
+}
