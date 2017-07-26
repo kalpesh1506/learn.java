@@ -1,0 +1,38 @@
+/*
+ * Abstract class can have any number of abstract methods & concrete methods
+ * If any method is abstract in a class then the class must also be abstract
+ * but vice-versa is not true
+ * Any class that extends this class must implement the body of all the abstract
+ * methods
+ */
+abstract public class abstractClass {
+	/*
+	 * abstract methods must have no definition
+	 * can't be static
+	 * can be either public or protected
+	 */
+	abstract public void read();
+	
+	abstract protected void read(int a, int b);
+	public void read(int a)
+	{
+		
+	}
+	public static void read(double a)
+	{
+		
+	}
+	public static void main(String[] args) {
+		/*
+		 * we also cannot instantiate an abstract class
+		 * which means the object of an abstract class can not be created
+		 * Only the class that implements the abstract class can make use of
+		 * the abstract class abstract & concrete methods with the help of it's own
+		 * objects
+		 */
+		//abstractClass ac = new abstractClass();
+		read(0.0);
+		
+	}
+
+}
